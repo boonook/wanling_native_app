@@ -2,7 +2,7 @@
 import { colors, icons, main, texts } from '@/assess/styles'
 import { size } from '@/utils'
 import React from 'react'
-import {Button} from '@ant-design/react-native'
+import {Button, Icon} from '@ant-design/react-native'
 import {View,StyleSheet,Image,Text} from 'react-native'
 export type ProductItem = {
     image?:any
@@ -107,7 +107,7 @@ export const ProductGroup = (props:ProductGroupItem)=>{
                     </View>
                     {props.more?<View style={[main.rowVCenter]}>
                         <Text style={texts.intro}>查看更多</Text>
-                        <Image style={icons.arrowRight} source={require('@/assess/images/icons/icon_arrow_right.png')}/>
+                        <Icon name={'right'} size={16} color={'#999'} />
                     </View>:null}
                 </View>
                 <View style={{backgroundColor:'#eee'}}>

@@ -31,6 +31,10 @@ import InTheJoinTaskScreen from '@/screen/AcceptNew/InTheJoinTaskScreen';
 import WardRecordScreen from '@/screen/AcceptNew/WardRecordScreen';
 ////最新公告
 import MessageCenterScreen from '@/screen/home/MessageCenterScreen';
+///任务详情
+import InTheJoinTaskDetailScreen from '@/screen/AcceptNew/InTheJoinTaskDetailScreen';
+////详情
+import NewDetailScreen from '@/screen/home/NewDetailScreen';
 import NavigationService from '@/utils/NavigationService';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -53,6 +57,8 @@ const menu=[
     {name:'inTheJoinTask',component:InTheJoinTaskScreen},
     {name:'wardRecord',component:WardRecordScreen},
     {name:'messageCenter',component:MessageCenterScreen},
+    {name:'newDetail',component:NewDetailScreen},
+    {name:'inTheJoinTaskDetail',component:InTheJoinTaskDetailScreen},
 ]
 
 function homeTab() {

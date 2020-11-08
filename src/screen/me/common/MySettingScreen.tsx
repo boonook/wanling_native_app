@@ -1,11 +1,17 @@
 import React, { useState,useEffect } from "react";
-import { View, Text,TouchableOpacity,StyleSheet,Image} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Image, StatusBar} from 'react-native';
 import Headers from "@/Components/header/Headers";
 import {Icon,ActionSheet} from '@ant-design/react-native';
 import NavigationService from '@/utils/NavigationService'
 import theme from '@/theme/theme.js'
-const MySettingScreen = (props) => {
-    function onLoginOut() {
+export default class MySettingScreen extends React.Component<any,any> {
+    componentDidMount() {
+        this.props.navigation.addListener('focus', () => {
+            StatusBar.setBarStyle('dark-content');
+            StatusBar.setBackgroundColor('#fff')
+        });
+    }
+    onLoginOut=()=>{
         const BUTTONS = [
             '确定',
             '取消',
@@ -25,43 +31,44 @@ const MySettingScreen = (props) => {
             }
         );
     }
-    return(
-        <View style={styles.container}>
-            <Headers
-                backgroundColor={theme.backgroundColor}
-                title={'设置'}
-                centerColor={'#fff'}
-                leftColor={'#fff'}
-                leftTitle={'返回'}
-                leftIcon={'left'}
-                {...props}
-            />
-           <View style={styles.contentBox}>
-               <View style={styles.contentBoxTop}>
-                  <TouchableOpacity onPress={()=>{
-                      this.props.navigation.navigate("myProductList");
-                  }}>
-                      <View style={styles.footer}>
-                          <View style={styles.footerImg}>
-                              <Image  style={styles.footerImg} source={require('@/assess/images/wode_shez.png')} />
-                          </View>
-                          <View style={styles.footerLeft}>
-                              <Text>我的进货</Text>
-                          </View>
-                          <Icon name="right" size="md" color="#ccc" />
-                      </View>
-                  </TouchableOpacity>
-               </View>
-               <View style={styles.loginOutBtn}>
-                   <TouchableOpacity onPress={onLoginOut}>
-                       <Text style={styles.loginOutBtnText}>退出登录</Text>
-                   </TouchableOpacity>
-               </View>
-           </View>
-        </View>
-    )
+    render() {
+        return(
+            <View style={styles.container}>
+                <Headers
+                    backgroundColor={'#fff'}
+                    title={'设置'}
+                    centerColor={'#666'}
+                    leftColor={'#666'}
+                    leftTitle={'返回'}
+                    leftIcon={'left'}
+                    {...this.props}
+                />
+                <View style={styles.contentBox}>
+                    <View style={styles.contentBoxTop}>
+                        <TouchableOpacity onPress={()=>{
+                            this.props.navigation.navigate("myProductList");
+                        }}>
+                            <View style={styles.footer}>
+                                <View style={styles.footerImg}>
+                                    <Image  style={styles.footerImg} source={require('@/assess/images/wode_shez.png')} />
+                                </View>
+                                <View style={styles.footerLeft}>
+                                    <Text>我的进货</Text>
+                                </View>
+                                <Icon name="right" size="md" color="#ccc" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.loginOutBtn}>
+                        <TouchableOpacity onPress={()=>this.onLoginOut()}>
+                            <Text style={styles.loginOutBtnText}>退出登录</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+        )
+    }
 }
-
 const styles = StyleSheet.create({
     container:{
         flex: 1,
@@ -109,5 +116,3 @@ const styles = StyleSheet.create({
         marginTop:20
     }
 })
-
-export default MySettingScreen;
