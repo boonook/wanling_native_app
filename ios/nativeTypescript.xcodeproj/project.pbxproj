@@ -20,7 +20,7 @@
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nativeTypescriptTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nativeTypescriptTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* 黄金城.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "黄金城.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* 万岭商城.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "万岭商城.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = nativeTypescript/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = nativeTypescript/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nativeTypescript/Images.xcassets; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* 黄金城.app */,
+				13B07F961A680F5B00A75B9A /* 万岭商城.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 			);
 			name = nativeTypescript;
 			productName = nativeTypescript;
-			productReference = 13B07F961A680F5B00A75B9A /* 黄金城.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* 万岭商城.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -189,7 +189,7 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = T7UT38Y6VZ;
+						DevelopmentTeam = 72R228ZCRU;
 						LastSwiftMigration = 1120;
 					};
 				};
@@ -324,17 +324,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T7UT38Y6VZ;
+				DEVELOPMENT_TEAM = 72R228ZCRU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = nativeTypescript/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hongseshipian.gold;
-				PRODUCT_NAME = "黄金城";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hongseshipian.wanlingShop;
+				PRODUCT_NAME = "万岭商城";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -348,16 +349,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T7UT38Y6VZ;
+				DEVELOPMENT_TEAM = 72R228ZCRU;
 				INFOPLIST_FILE = nativeTypescript/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hongseshipian.gold;
-				PRODUCT_NAME = "黄金城";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hongseshipian.wanlingShop;
+				PRODUCT_NAME = "万岭商城";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

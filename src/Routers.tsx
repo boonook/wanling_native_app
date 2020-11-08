@@ -35,6 +35,8 @@ import MessageCenterScreen from '@/screen/home/MessageCenterScreen';
 import InTheJoinTaskDetailScreen from '@/screen/AcceptNew/InTheJoinTaskDetailScreen';
 ////详情
 import NewDetailScreen from '@/screen/home/NewDetailScreen';
+////拼团商城
+import JoinGroupMallScreen from '@/screen/merchant/JoinGroupMallScreen';
 import NavigationService from '@/utils/NavigationService';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -59,6 +61,7 @@ const menu=[
     {name:'messageCenter',component:MessageCenterScreen},
     {name:'newDetail',component:NewDetailScreen},
     {name:'inTheJoinTaskDetail',component:InTheJoinTaskDetailScreen},
+    {name:'joinGroupMall',component:JoinGroupMallScreen},
 ]
 
 function homeTab() {

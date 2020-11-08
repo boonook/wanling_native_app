@@ -3,9 +3,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "jsx": "react",
     "allowSyntheticDefaultImports": true

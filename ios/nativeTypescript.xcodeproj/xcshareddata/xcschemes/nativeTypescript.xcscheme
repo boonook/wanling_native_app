@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "&#x9ec4;&#x91d1;&#x57ce;.app"
+               BuildableName = "&#x4e07;&#x5cad;&#x5546;&#x57ce;.app"
                BlueprintName = "nativeTypescript"
                ReferencedContainer = "container:nativeTypescript.xcodeproj">
             </BuildableReference>
@@ -41,7 +41,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "&#x9ec4;&#x91d1;&#x57ce;.app"
+            BuildableName = "&#x4e07;&#x5cad;&#x5546;&#x57ce;.app"
             BlueprintName = "nativeTypescript"
             ReferencedContainer = "container:nativeTypescript.xcodeproj">
          </BuildableReference>
@@ -72,7 +72,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "&#x9ec4;&#x91d1;&#x57ce;.app"
+            BuildableName = "&#x4e07;&#x5cad;&#x5546;&#x57ce;.app"
             BlueprintName = "nativeTypescript"
             ReferencedContainer = "container:nativeTypescript.xcodeproj">
          </BuildableReference>

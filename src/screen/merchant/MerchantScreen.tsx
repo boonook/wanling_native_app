@@ -28,7 +28,7 @@ export default class MerchantScreen extends React.Component<any,any> {
         {
             icon:require('@/assess/images/icons/icon_information.png'),
             text:'拼团商城',
-            route:"Information"
+            route:"joinGroupMall"
         },
         {
             icon:require('@/assess/images/icons/icon_agency.png'),
@@ -131,8 +131,8 @@ export default class MerchantScreen extends React.Component<any,any> {
         });
     }
 
-    goTo=()=>{
-
+    goTo=(route)=>{
+        this.props.navigation.push(route)
     }
 
     render() {

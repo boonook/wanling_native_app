@@ -134,7 +134,7 @@ export default class MeScreen extends React.Component<any,any> {
                                 <View style={styles.cardBoxBodyItemImg}>
                                     <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj04.png')}/>
                                 </View>
-                                <Text>我的团队</Text>
+                                <Text>我的拼团</Text>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
                                 <View style={styles.cardBoxBodyItemImg}>
