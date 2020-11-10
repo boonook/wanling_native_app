@@ -219,7 +219,7 @@ export default class Request {
     //检查响应
     static checkResponse(response) {
         Request.setNetworkActivityIndicatorVisible(false);
-        Portal.remove(key)
+        Portal.remove(key);
         if (response.ok === true) {
             return response.json();
         } else {
@@ -251,7 +251,7 @@ export default class Request {
 
     //检查返回状态码
     static checkCode(response) {
-        const code = Number(response.code);
+        const code = Number(response.status);
         if (reloginCode.indexOf(code) !== -1) {
             let error = {};
             error.message = response.message.replace('java.lang.Exception:', '');

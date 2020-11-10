@@ -5,6 +5,8 @@ import Headers from "@/Components/header/Headers";
 import {Icon, Toast,Provider} from '@ant-design/react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {TouchableOpacity} from "react-native-gesture-handler";
+import {getCode,registered} from '@/Api/login'
+import constant from "@/utils/constant";
 const {height,width} =  Dimensions.get('window');
 const RegisteredScreen = (props) => {
     /****密码是否可见start****/
@@ -13,8 +15,15 @@ const RegisteredScreen = (props) => {
     const [settingPayPwdStatus,setSettingPayPwdStatus] = useState(true);
     const [querenPayPwdStatus,setQuerenPayPwdStatus] = useState(true);
     /****密码是否可见end****/
-    const [userName,setUserName] = useState('boonook');
-    const [userPwd,setUserPwd] = useState('boonook')
+    const [timer,setTimer] = useState(59);
+    const [phone,setPhone] = useState(null);
+    const [code,setCode] = useState(null);
+    const [loginPassword,setLoginPassword] = useState(null);
+    const [againLoginPassword,setAgainLoginPassword] = useState(null);
+    const [dealPassword,setDealPassword] = useState(null);
+    const [againDealPassword,setAgainDealPassword] = useState(null);
+    const [invitationCode,setInvitationCode] = useState(null);
+    const [codeTitle,setCodeTitle] = useState('获取验证码')
 
     useEffect(() => {
         props.navigation.addListener('focus', () => {
@@ -24,17 +33,85 @@ const RegisteredScreen = (props) => {
     })
 
     function onRegistered() {
-        /*if(userName+''==='' || userName===null||userName===undefined){
-            Toast.fail('用户名不能为空！',0.8);
+        if (phone + '' === '' || phone === null) {
+            Toast.info(`手机号不能为空`);
+            return false;
+        } else {
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                Toast.info(`手机号码有误`);
+                return false;
+            }
+        }
+        if(code + '' === '' || code === null){
+            Toast.info(`短信验证码不能为空`);
+            return false;
+        }else{
+            if(code.length<4){
+                Toast.info(`短信验证码为四位或六位`);
+                return false;
+            }
+        }
+        if(loginPassword+''==='' || loginPassword === null){
+            Toast.info(`登陆密码不能为空`);
             return false;
         }else{
             let reg = /^(?![^a-zA-Z]+$)(?!\D+$).{6,12}/;
-            if(!reg.test(userName)){
-                Toast.fail('密码必须有数字和字母构成，且最小6位最大12位！',0.8);
+            if(!reg.test(loginPassword)){
+                Toast.fail('登陆密码必须有数字和字母构成，且最小6位最大12位！',0.8);
                 return false;
             }
-        }*/
-        props.navigation.push('finishRegistered')
+        }
+        if(againLoginPassword+''==='' || againLoginPassword === null){
+            Toast.info(`确认登陆密码不能为空`);
+            return false;
+        }else{
+           if(loginPassword+''!==againLoginPassword+''){
+               Toast.info(`两次登陆密码不一致`);
+               return false;
+           }
+        }
+        if(dealPassword+''==='' || dealPassword === null){
+            Toast.info(`支付密码不能为空`);
+            return false;
+        }else{
+            if(dealPassword.length<6){
+                Toast.info(`支付密码不能小于6位`);
+                return false;
+            }
+        }
+        if(againDealPassword+''==='' || againDealPassword === null){
+            Toast.info(`确认支付密码不能为空`);
+            return false;
+        }else{
+            if(dealPassword!==againDealPassword){
+                Toast.info(`两次支付密码不一致`);
+                return false;
+            }
+        }
+        if(invitationCode+''==='' || invitationCode === null){
+            Toast.info(`邀请码不能为空`);
+            return false;
+        }else{
+            if(invitationCode.length<4){
+                Toast.info(`邀请码长度不小于4`);
+                return false;
+            }
+        }
+        let params={
+            "phone": phone,
+            "code": code,
+            "dealPassword": dealPassword,
+            "loginPassword": loginPassword,
+            "invitationCode": invitationCode
+        }
+        registered(params).then(res=>{
+            if(res && res.code+''===constant.SUCCESS+''){
+                Toast.success('注册成功',0.8);
+                setTimeout(()=>{
+                    props.navigation.push('login')
+                },800)
+            }
+        })
     }
 
     function onSetSettingLoginPwdStatus() {
@@ -53,6 +130,48 @@ const RegisteredScreen = (props) => {
         setQuerenPayPwdStatus(!querenPayPwdStatus)
     }
 
+    function _onGetCode(){
+        let params={
+            phone
+        }
+        // @ts-ignore
+        getCode(params).then(res=>{
+            if(res && res.code+''===constant.SUCCESS+''){
+                Toast.success(`验证码发送成功`);
+            }
+        })
+    }
+
+    function _onGetCodeBtn() {
+        let time = timer;
+        if (phone + '' === '' || phone === null) {
+            Toast.info(`手机号不能为空`);
+            return false;
+        } else {
+            if(timer===59){
+                if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                    Toast.info(`手机号码有误`);
+                    return false;
+                }else{
+                    _onGetCode();
+                    let timeOut = setInterval(()=>{
+                        if(time===0){
+                            setTimer(59);
+                            clearInterval(timeOut)
+                            setCodeTitle('获取验证码');
+                        }else{
+                            time = time-1
+                            setTimer(time);
+                            setCodeTitle(`${time}s后重新获取`);
+                        }
+                    },1000)
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+
     // @ts-ignore
     return(
         <Provider>
@@ -69,11 +188,41 @@ const RegisteredScreen = (props) => {
                 <View style={styles.formContent}>
                     <View style={[styles.formItem,{marginTop:20}]}>
                         <View style={styles.formItemLeft}>
-                            <Text style={styles.formItemLeftText}>设置登陆密码</Text>
+                            <Text style={styles.formItemLeftText}>手机号</Text>
                         </View>
                         <View style={styles.formItemRight}>
-                            <TextInput value={userName} onChange={value =>{
-                                setUserName(value.nativeEvent.text)
+                            <TextInput
+                                value={phone}
+                                onChange={value =>{
+                                    const newText = value.nativeEvent.text.replace(/[^\d]+/, '');
+                                    setPhone(newText);
+                                }}
+                               placeholder="请输入手机号"
+                               keyboardType='numeric'
+                               style={styles.formItemRightText}/>
+                        </View>
+                    </View>
+                    <View style={[styles.formItem,{marginTop:20}]}>
+                        <View style={styles.formItemLeft}>
+                            <Text style={styles.formItemLeftText}>验证码</Text>
+                        </View>
+                        <View style={styles.formItemRight}>
+                            <TextInput value={code} onChange={value =>{
+                                const newText = value.nativeEvent.text.replace(/[^\d]+/, '');
+                                setCode(newText)
+                            }} placeholder="请输入验证码" keyboardType='numeric' style={styles.formItemRightText}/>
+                        </View>
+                        <View style={styles.getCodeBtn}>
+                            <Text onPress={_onGetCodeBtn}>{codeTitle}</Text>
+                        </View>
+                    </View>
+                    <View style={[styles.formItem,{marginTop:20}]}>
+                        <View style={styles.formItemLeft}>
+                            <Text style={styles.formItemLeftText}>登陆密码</Text>
+                        </View>
+                        <View style={styles.formItemRight}>
+                            <TextInput value={loginPassword} onChange={value =>{
+                                setLoginPassword(value.nativeEvent.text)
                             }} placeholder="请输入登陆密码" secureTextEntry={settingLoginPwdStatus} style={styles.formItemRightText}/>
                         </View>
                         <TouchableOpacity onPress={onSetSettingLoginPwdStatus}>
@@ -85,8 +234,8 @@ const RegisteredScreen = (props) => {
                             <Text style={styles.formItemLeftText}>确定登陆密码</Text>
                         </View>
                         <View style={styles.formItemRight}>
-                            <TextInput value={userName} onChange={value =>{
-                                setUserName(value.nativeEvent.text)
+                            <TextInput value={againLoginPassword} onChange={value =>{
+                                setAgainLoginPassword(value.nativeEvent.text)
                             }} placeholder="请输入登陆密码" secureTextEntry={querenLoginPwdStatus} style={styles.formItemRightText}/>
                         </View>
                         <TouchableOpacity onPress={onSetQuerenLoginPwdStatus}>
@@ -95,12 +244,13 @@ const RegisteredScreen = (props) => {
                     </View>
                     <View style={[styles.formItem,{marginTop:20}]}>
                         <View style={styles.formItemLeft}>
-                            <Text style={styles.formItemLeftText}>设置支付密码</Text>
+                            <Text style={styles.formItemLeftText}>设置交易密码</Text>
                         </View>
                         <View style={styles.formItemRight}>
-                            <TextInput value={userName} onChange={value =>{
-                                setUserName(value.nativeEvent.text)
-                            }} placeholder="请输入支付密码" secureTextEntry={settingPayPwdStatus} style={styles.formItemRightText}/>
+                            <TextInput value={dealPassword} onChange={value =>{
+                                const newText = value.nativeEvent.text.replace(/[^\d]+/, '');
+                                setDealPassword(newText)
+                            }} placeholder="请输入交易密码" keyboardType='numeric' secureTextEntry={settingPayPwdStatus} style={styles.formItemRightText}/>
                         </View>
                         <TouchableOpacity onPress={onSetSettingPayPwdStatus}>
                             {settingPayPwdStatus?<Icon name="eye" size="md" color="#666" />:<Icon name="eye-invisible" size="md" color="#666" />}
@@ -108,12 +258,13 @@ const RegisteredScreen = (props) => {
                     </View>
                     <View style={[styles.formItem,{marginTop:20}]}>
                         <View style={styles.formItemLeft}>
-                            <Text style={styles.formItemLeftText}>确认支付密码</Text>
+                            <Text style={styles.formItemLeftText}>确认交易密码</Text>
                         </View>
                         <View style={styles.formItemRight}>
-                            <TextInput value={userName} onChange={value =>{
-                                setUserName(value.nativeEvent.text)
-                            }} placeholder="请输入支付密码" secureTextEntry={querenPayPwdStatus} style={styles.formItemRightText}/>
+                            <TextInput value={againDealPassword} onChange={value =>{
+                                const newText = value.nativeEvent.text.replace(/[^\d]+/, '');
+                                setAgainDealPassword(newText)
+                            }} placeholder="请输入支付密码" keyboardType='numeric' secureTextEntry={querenPayPwdStatus} style={styles.formItemRightText}/>
                         </View>
                         <TouchableOpacity onPress={onSetQuerenPayPwdStatus}>
                             {querenPayPwdStatus?<Icon name="eye" size="md" color="#666" />:<Icon name="eye-invisible" size="md" color="#666" />}
@@ -124,19 +275,10 @@ const RegisteredScreen = (props) => {
                             <Text style={styles.formItemLeftText}>邀请码（必填）</Text>
                         </View>
                         <View style={styles.formItemRight}>
-                            <TextInput value={userName} onChange={value =>{
-                                setUserName(value.nativeEvent.text)
+                            <TextInput value={invitationCode} onChange={value =>{
+                                const newText = value.nativeEvent.text.replace(/[\W]/g,'');
+                                setInvitationCode(value.nativeEvent.text)
                             }} placeholder="请输入邀请码" style={styles.formItemRightText}/>
-                        </View>
-                    </View>
-                    <View style={[styles.formItem,{marginTop:20}]}>
-                        <View style={styles.formItemLeft}>
-                            <Text style={styles.formItemLeftText}>昵称</Text>
-                        </View>
-                        <View style={styles.formItemRight}>
-                            <TextInput value={userName} onChange={value =>{
-                                setUserName(value.nativeEvent.text)
-                            }} placeholder="请输入昵称" style={styles.formItemRightText}/>
                         </View>
                     </View>
                 </View>
@@ -257,6 +399,9 @@ const styles = StyleSheet.create({
     },
     formItemLeftText:{
         color:'#666'
+    },
+    getCodeBtn:{
+        marginLeft:15
     }
 })
 

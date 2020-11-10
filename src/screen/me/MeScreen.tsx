@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
-import {View, Text, ScrollView, StyleSheet, StatusBar, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, StatusBar, TouchableOpacity, TextInput} from 'react-native';
 import {Button, Icon} from '@ant-design/react-native';
-import {CachedImage} from 'react-native-img-cache'
+import {CachedImage,CachedImageBackground} from 'react-native-img-cache'
 import Headers from "@/Components/header/Headers";
 import ImagePicker from '@/Components/imagePicker/ImagePicker';
 import ChildrenSolt from '@/Components/childrenSolt/ChildrenSolt';
@@ -33,7 +33,30 @@ export default class MeScreen extends React.Component<any,any> {
                     {...this.props}
                 />
                 <ScrollView>
-                    <View style={styles.cardBox}>
+                    <View style={styles.contentHeader}>
+                        <CachedImageBackground  style={{width:'100%',height:260}}  source={require('@/assess/images/me/wode_bg.png')}>
+                            <View style={styles.contentHeaderContent}>
+                                <View style={styles.contentHeaderContentLeft}>
+
+                                </View>
+                                <View style={styles.contentHeaderContentCenter}>
+                                   <View>
+                                       <Text style={styles.contentHeaderContentCenterNameText}>用户名：wei0001</Text>
+                                   </View>
+                                    <View>
+                                        <Text  style={styles.contentHeaderContentCenterPhoneText}>手机号：15267889897</Text>
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={styles.sign}>签到</Text>
+                                </View>
+                            </View>
+                        </CachedImageBackground>
+                       <View style={styles.contentHeaderInputBg}>
+                           <CachedImageBackground  style={{width:'100%',height:120}}  source={require('@/assess/images/me/juxing.png')}/>
+                       </View>
+                    </View>
+                    <View style={[styles.cardBox,{marginTop:-45}]}>
                         <View style={styles.cardBoxHeader}>
                             <View style={styles.cardBoxHeaderLeft}>
                                 <Text>我的订单</Text>
@@ -240,5 +263,53 @@ const styles = StyleSheet.create({
     },
     cardBoxBodyItemSum:{
         color:"#999"
+    },
+    contentHeader:{
+        position:'relative'
+    },
+    contentHeaderInputBg:{
+        position:'absolute',
+        zIndex:999,
+        width:'100%',
+        bottom:-30,
+        elevation:999
+    },
+    contentHeaderContent:{
+        height:260,
+        flexDirection:'row',
+        alignItems:'center',
+        padding:15,
+        marginTop:-30
+    },
+    contentHeaderContentLeft:{
+        width:100,
+        height:100,
+        backgroundColor:'#eee',
+        borderRadius:50
+    },
+    contentHeaderContentCenter:{
+        flex:1,
+        marginLeft:15,
+        marginRight:15
+    },
+    contentHeaderContentCenterNameText:{
+        color:'#fff',
+        fontSize:18,
+        marginBottom:10,
+        fontWeight:'700'
+    },
+    contentHeaderContentCenterPhoneText:{
+        color:'#fff',
+        fontSize:12,
+    },
+    sign:{
+        backgroundColor:'rgba(255,255,255,0.4)',
+        color:'#fff',
+        paddingLeft:20,
+        paddingRight:20,
+        paddingTop:10,
+        paddingBottom:10,
+        borderRadius:5,
+        overflow:'hidden'
     }
 })

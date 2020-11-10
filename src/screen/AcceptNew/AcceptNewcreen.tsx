@@ -3,6 +3,7 @@ import {View, ScrollView, StatusBar, Text, StyleSheet, TextInput, TouchableOpaci
 import Headers from "@/Components/header/Headers";
 import theme from "@/theme/theme";
 import {Icon} from "@ant-design/react-native";
+import {CachedImageBackground} from "react-native-img-cache";
 
 export default class AcceptNewcreen extends React.Component<any,any> {
     componentDidMount() {
@@ -34,14 +35,35 @@ export default class AcceptNewcreen extends React.Component<any,any> {
                     {...this.props}
                 />
                 <ScrollView style={{flex:1}}>
-                    <View style={styles.searchBoxParent}>
-                        <View style={styles.searchBox}>
-                            <View style={styles.searchBoxLeft}>
-                                <Icon name={'search'} />
+                    <View style={styles.contentHeader}>
+                        <CachedImageBackground  style={{width:'100%',height:260}}  source={require('@/assess/images/acceptNew/wode_bg.png')}>
+                            <View style={styles.contentHeaderContent}>
+                                <View style={styles.contentHeaderContentLeft}>
+
+                                </View>
+                                <View style={styles.contentHeaderContentCenter}>
+                                    <View>
+                                        <Text style={styles.contentHeaderContentCenterNameText}>wei0001<Text style={styles.signIcon}>暂无会员</Text></Text>
+                                    </View>
+                                    <View>
+                                        <Text  style={styles.contentHeaderContentCenterPhoneText}>ID：15267889897</Text>
+                                    </View>
+                                </View>
                             </View>
-                            <View style={styles.searchBoxCenter}>
-                                <TextInput placeholder={'输入关键词搜索'} style={styles.inputSearch}/>
-                            </View>
+                        </CachedImageBackground>
+                        <View style={styles.contentHeaderInputBg}>
+                            <CachedImageBackground  style={{width:'100%',height:120}}  source={require('@/assess/images/me/juxing.png')}>
+                                <View style={styles.searchBoxParent}>
+                                    <View style={styles.searchBox}>
+                                        <View style={styles.searchBoxLeft}>
+                                            <Icon name={'search'} />
+                                        </View>
+                                        <View style={styles.searchBoxCenter}>
+                                            <TextInput placeholder={'输入关键词搜索'} style={styles.inputSearch}/>
+                                        </View>
+                                    </View>
+                                </View>
+                            </CachedImageBackground>
                         </View>
                     </View>
                     <View style={styles.listItem}>
@@ -202,10 +224,9 @@ export default class AcceptNewcreen extends React.Component<any,any> {
 
 const styles = StyleSheet.create({
     searchBoxParent:{
-        backgroundColor:'#fff',
         paddingLeft:30,
         paddingRight:30,
-        paddingTop:15,
+        paddingTop:45,
         paddingBottom:15
     },
     searchBox:{
@@ -303,6 +324,52 @@ const styles = StyleSheet.create({
     },
     listItemBodyCenterTopLeftText:{
         fontSize:16
+    },
+    contentHeader:{
+        position:'relative'
+    },
+    contentHeaderInputBg:{
+        position:'absolute',
+        zIndex:999,
+        width:'100%',
+        bottom:-30,
+        elevation:999
+    },
+    contentHeaderContent:{
+        height:260,
+        flexDirection:'row',
+        alignItems:'center',
+        padding:15,
+        marginTop:-30
+    },
+    contentHeaderContentLeft:{
+        width:100,
+        height:100,
+        backgroundColor:'#eee',
+        borderRadius:50
+    },
+    contentHeaderContentCenter:{
+        flex:1,
+        marginLeft:15,
+        marginRight:15
+    },
+    contentHeaderContentCenterNameText:{
+        color:'#fff',
+        fontSize:18,
+        marginBottom:10,
+        fontWeight:'700'
+    },
+    contentHeaderContentCenterPhoneText:{
+        color:'#fff',
+        fontSize:12,
+    },
+    signIcon:{
+        color:'#fff',
+        padding:20,
+        fontSize:12,
+        borderRadius:5,
+        overflow:'hidden',
+        paddingLeft:15
     }
 })
 

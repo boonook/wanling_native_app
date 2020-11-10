@@ -13,10 +13,20 @@ let LoadingScreen = inject("userState")(observer((props=>{
             Portal.remove(key)
         }
         function onEnd() {
-            NavigationService.reset('login');
+            let data = props.userState.getIsLogin;
+            if(data+''==='true'){
+                NavigationService.reset('home');
+            }else{
+                NavigationService.reset('login');
+            }
         }
         function onNextPage() {
-            NavigationService.reset('login');
+            let data = props.userState.getIsLogin;
+            if(data+''==='true'){
+                NavigationService.reset('home');
+            }else{
+                NavigationService.reset('login');
+            }
         }
         return(
             <Provider>

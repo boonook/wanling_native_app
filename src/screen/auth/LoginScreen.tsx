@@ -1,10 +1,13 @@
 //@ts-nocheck
-import { button, colors, main } from '@/assess/styles';
+import { colors, main } from '@/assess/styles';
 import { size } from '@/utils';
 import React from 'react';
 import {View,Text,Image,StyleSheet,TextInput,TouchableOpacity} from 'react-native';
 import { KeyboardAwareScrollView }  from 'react-native-keyboard-aware-scroll-view';
 import {inject, observer} from 'mobx-react';
+import {Toast} from '@ant-design/react-native'
+import {Login} from '@/Api/login';
+import constant from '@/utils/constant';
 
 @inject(["userState"]) // 注入对应的store
 @observer // 监听当前组件
@@ -12,12 +15,42 @@ export default class LoginScreen extends React.Component<any,any>{
     constructor(props) {
         super(props);
         this.state = {
-            mnemonic:null
+            mnemonic:null,
+            phone:'18871082924',
+            password:'12345'
         };
     }
 
     handleLogin(){
-        this.props.userState.login()
+        if (this.state.phone + '' === '' || this.state.phone === null) {
+            Toast.info(`手机号不能为空`);
+            return false;
+        } else {
+            let phone = this.state.phone;
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                Toast.info(`手机号码有误`);
+                return false;
+            }
+        }
+        if(this.state.password+''==='' || this.state.password===null){
+            Toast.info(`登陆密码不能为空`);
+            return false;
+        }else{
+            if(this.state.password.length<5){
+                Toast.info(`登陆密码长度不能小于6`);
+                return false;
+            }
+        }
+        let params={
+            phone:this.state.phone,
+            password:this.state.password,
+        }
+        Login(params).then(res=>{
+            if(res && res.code+''===constant.SUCCESS+''){
+                let data = res.data||{};
+                this.props.userState.login(data);
+            }
+        })
     }
 
     onRegistered=()=>{
@@ -39,11 +72,21 @@ export default class LoginScreen extends React.Component<any,any>{
                     <View style={styles.form}>
                         <View style={styles.formItem}>
                             <Image style={styles.icon} source={require('@/assess/images/auth/icon_phone.png')}/>
-                            <TextInput style={styles.input} placeholder={"请输入手机号"} keyboardType={'phone-pad'}/>
+                            <TextInput
+                                value={this.state.phone}
+                                onChangeText={(text) => {
+                                    const newText = text.replace(/[^\d]+/, '');
+                                    this.setState({phone: newText})
+                                }}
+                                style={styles.input} placeholder={"请输入手机号"} keyboardType={'phone-pad'}/>
                         </View>
                         <View style={[styles.formItem,{marginTop:15}]}>
                             <Image style={styles.icon} source={require('@/assess/images/auth/icon_pwd.png')}/>
-                            <TextInput style={styles.input} placeholder={"请输入手机号"} secureTextEntry={true}/>
+                            <TextInput
+                                value={this.state.password}
+                                onChangeText={(text) => {
+                                   this.setState({password: text})
+                                }} style={styles.input} placeholder={"请输入登陆密码"} secureTextEntry={true}/>
                         </View>
                         <View style={styles.forget} >
                             <Text onPress={()=>this.onForgetPwd()}>忘记密码？</Text>

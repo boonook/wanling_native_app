@@ -3,7 +3,11 @@ import {View, Text, TouchableOpacity, StyleSheet, Image, StatusBar} from 'react-
 import Headers from "@/Components/header/Headers";
 import {Icon,ActionSheet} from '@ant-design/react-native';
 import NavigationService from '@/utils/NavigationService'
-import theme from '@/theme/theme.js'
+import {inject, observer} from "mobx-react";
+
+// @ts-ignore
+@inject(["userState"]) // 注入对应的store
+@observer // 监听当前组件
 export default class MySettingScreen extends React.Component<any,any> {
     componentDidMount() {
         this.props.navigation.addListener('focus', () => {
@@ -26,7 +30,7 @@ export default class MySettingScreen extends React.Component<any,any> {
             },
             buttonIndex => {
                 if(buttonIndex+''==='0'){
-                    NavigationService.reset('login')
+                    this.props.userState.loginOut();
                 }
             }
         );
