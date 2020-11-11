@@ -8,7 +8,7 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import {getForgetPwdCode,resetPassword} from "@/Api/login";
 import constant from "@/utils/constant";
 const {height,width} =  Dimensions.get('window');
-const ForgetPasswordSccreen = (props) => {
+const EditLoginPwdScreen = (props) => {
     /****密码是否可见start****/
     const [settingLoginPwdStatus,setSettingLoginPwdStatus] = useState(true);
     const [querenLoginPwdStatus,setQuerenLoginPwdStatus] = useState(true);
@@ -157,7 +157,7 @@ const ForgetPasswordSccreen = (props) => {
                         border={true}
                         leftColor={'#444'}
                         backgroundColor={'#fff'}
-                        centerContent={<Text style={[styles.headerBoxCenterText,{color:'#444'}]} numberOfLines={1}>{'忘记密码'}</Text>}
+                        centerContent={<Text style={[styles.headerBoxCenterText,{color:'#444'}]} numberOfLines={1}>{'修改登陆密码'}</Text>}
                         {...props}
                     />
                     <View style={styles.formContent}>
@@ -216,7 +216,7 @@ const ForgetPasswordSccreen = (props) => {
                     <View style={styles.loginBtn}>
                         <TouchableOpacity onPress={onSureAndLogin}>
                             <View style={{backgroundColor:'#E71F2A',borderRadius:5}}>
-                                <Text style={styles.loginBtnText}>确认修改登陆</Text>
+                                <Text style={styles.loginBtnText}>确认修改登陆密码</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -349,4 +349,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default ForgetPasswordSccreen;
+export default EditLoginPwdScreen;

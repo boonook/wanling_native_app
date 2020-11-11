@@ -6,7 +6,7 @@ import {View,Text,Image,StyleSheet,TextInput,TouchableOpacity} from 'react-nativ
 import { KeyboardAwareScrollView }  from 'react-native-keyboard-aware-scroll-view';
 import {inject, observer} from 'mobx-react';
 import {Toast} from '@ant-design/react-native'
-import {Login} from '@/Api/login';
+import {Login,userInfo} from '@/Api/login';
 import constant from '@/utils/constant';
 
 @inject(["userState"]) // 注入对应的store
@@ -49,6 +49,10 @@ export default class LoginScreen extends React.Component<any,any>{
             if(res && res.code+''===constant.SUCCESS+''){
                 let data = res.data||{};
                 this.props.userState.login(data);
+                userInfo({}).then(res=>{
+                    debugger
+                    this.props.userState.setUserInfo(res.data);
+                })
             }
         })
     }

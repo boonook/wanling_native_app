@@ -37,6 +37,20 @@ import InTheJoinTaskDetailScreen from '@/screen/AcceptNew/InTheJoinTaskDetailScr
 import NewDetailScreen from '@/screen/home/NewDetailScreen';
 ////拼团商城
 import JoinGroupMallScreen from '@/screen/merchant/JoinGroupMallScreen';
+////邀请好友
+import SharePromotionScreen from '@/screen/me/common/SharePromotionScreen';
+////我的团队
+import MyTeamScreen from '@/screen/me/common/MyTeamScreen';
+///收藏中心
+import MyCollectCenter from '@/screen/me/common/MyCollectCenter';
+///我的拼团
+import MyJoinGroupScreen from '@/screen/me/common/MyJoinGroupScreen';
+///安全设置
+import SafetySettingScreen from '@/screen/me/common/SafetySettingScreen';
+///修改登陆密码
+import EditLoginPwdScreen from '@/screen/me/common/EditLoginPwdScreen';
+///修改支付密码
+import EditPayPwdScreen from '@/screen/me/common/EditPayPwdScreen';
 import NavigationService from '@/utils/NavigationService';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -62,6 +76,13 @@ const menu=[
     {name:'newDetail',component:NewDetailScreen},
     {name:'inTheJoinTaskDetail',component:InTheJoinTaskDetailScreen},
     {name:'joinGroupMall',component:JoinGroupMallScreen},
+    {name:'sharePromotion',component:SharePromotionScreen},
+    {name:'myTeam',component:MyTeamScreen},
+    {name:'myCollectCenter',component:MyCollectCenter},
+    {name:'myJoinGroup',component:MyJoinGroupScreen},
+    {name:'safetySetting',component:SafetySettingScreen},
+    {name:'editLoginPwd',component:EditLoginPwdScreen},
+    {name:'editPayPwd',component:EditPayPwdScreen},
 ]
 
 function homeTab() {

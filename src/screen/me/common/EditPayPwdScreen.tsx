@@ -8,7 +8,7 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import {getForgetPwdCode,resetPassword} from "@/Api/login";
 import constant from "@/utils/constant";
 const {height,width} =  Dimensions.get('window');
-const ForgetPasswordSccreen = (props) => {
+const EditPayPwdScreen = (props) => {
     /****密码是否可见start****/
     const [settingLoginPwdStatus,setSettingLoginPwdStatus] = useState(true);
     const [querenLoginPwdStatus,setQuerenLoginPwdStatus] = useState(true);
@@ -154,10 +154,10 @@ const ForgetPasswordSccreen = (props) => {
                 <View style={{ height:height,width:width,flexDirection:'column',backgroundColor:'#fff'}}>
                     <Headers
                         leftIcon={'left'}
-                        border={true}
                         leftColor={'#444'}
+                        border={true}
                         backgroundColor={'#fff'}
-                        centerContent={<Text style={[styles.headerBoxCenterText,{color:'#444'}]} numberOfLines={1}>{'忘记密码'}</Text>}
+                        centerContent={<Text style={[styles.headerBoxCenterText,{color:'#444'}]} numberOfLines={1}>{'修改支付密码'}</Text>}
                         {...props}
                     />
                     <View style={styles.formContent}>
@@ -188,12 +188,12 @@ const ForgetPasswordSccreen = (props) => {
                         </View>
                         <View style={[styles.formItem,{marginTop:20}]}>
                             <View style={styles.formItemLeft}>
-                                <Text style={styles.formItemLeftText}>登陆密码</Text>
+                                <Text style={styles.formItemLeftText}>支付密码</Text>
                             </View>
                             <View style={styles.formItemRight}>
                                 <TextInput value={loginPassword} onChange={value =>{
                                     setLoginPassword(value.nativeEvent.text)
-                                }} placeholder="请输入登陆密码" secureTextEntry={settingLoginPwdStatus} style={styles.formItemRightText}/>
+                                }} placeholder="请输入支付密码" secureTextEntry={settingLoginPwdStatus} style={styles.formItemRightText}/>
                             </View>
                             <TouchableOpacity onPress={onSetSettingLoginPwdStatus}>
                                 {settingLoginPwdStatus?<Icon name="eye" size="md" color="#666" />:<Icon name="eye-invisible" size="md" color="#666" />}
@@ -201,12 +201,12 @@ const ForgetPasswordSccreen = (props) => {
                         </View>
                         <View style={[styles.formItem,{marginTop:20}]}>
                             <View style={styles.formItemLeft}>
-                                <Text style={styles.formItemLeftText}>确定登陆密码</Text>
+                                <Text style={styles.formItemLeftText}>确定支付密码</Text>
                             </View>
                             <View style={styles.formItemRight}>
                                 <TextInput value={againLoginPassword} onChange={value =>{
                                     setAgainLoginPassword(value.nativeEvent.text)
-                                }} placeholder="请输入登陆密码" secureTextEntry={querenLoginPwdStatus} style={styles.formItemRightText}/>
+                                }} placeholder="请输入支付密码" secureTextEntry={querenLoginPwdStatus} style={styles.formItemRightText}/>
                             </View>
                             <TouchableOpacity onPress={onSetQuerenLoginPwdStatus}>
                                 {querenLoginPwdStatus?<Icon name="eye" size="md" color="#666" />:<Icon name="eye-invisible" size="md" color="#666" />}
@@ -216,7 +216,7 @@ const ForgetPasswordSccreen = (props) => {
                     <View style={styles.loginBtn}>
                         <TouchableOpacity onPress={onSureAndLogin}>
                             <View style={{backgroundColor:'#E71F2A',borderRadius:5}}>
-                                <Text style={styles.loginBtnText}>确认修改登陆</Text>
+                                <Text style={styles.loginBtnText}>确认修改支付密码</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -349,4 +349,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default ForgetPasswordSccreen;
+export default EditPayPwdScreen;

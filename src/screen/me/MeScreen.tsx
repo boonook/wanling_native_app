@@ -1,17 +1,32 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
 import {View, Text, ScrollView, StyleSheet, StatusBar, TouchableOpacity, TextInput} from 'react-native';
 import {Button, Icon} from '@ant-design/react-native';
 import {CachedImage,CachedImageBackground} from 'react-native-img-cache'
 import Headers from "@/Components/header/Headers";
 import ImagePicker from '@/Components/imagePicker/ImagePicker';
 import ChildrenSolt from '@/Components/childrenSolt/ChildrenSolt';
+import {inject, observer} from "mobx-react";
 
+// @ts-ignore
+@inject(["userState"]) // 注入对应的store
+@observer // 监听当前组件
 export default class MeScreen extends React.Component<any,any> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userInfo:{}
+        };
+    }
+
     componentDidMount() {
         this.props.navigation.addListener('focus', () => {
             StatusBar.setBarStyle('dark-content');
             StatusBar.setBackgroundColor('#fff')
         });
+        let userInfo = JSON.parse(this.props.userState.getUserInfo)
+        this.setState({
+            userInfo
+        })
     }
     openDrawer=()=>{
         this.props.navigation.toggleDrawer()
@@ -41,10 +56,10 @@ export default class MeScreen extends React.Component<any,any> {
                                 </View>
                                 <View style={styles.contentHeaderContentCenter}>
                                    <View>
-                                       <Text style={styles.contentHeaderContentCenterNameText}>用户名：wei0001</Text>
+                                       <Text style={styles.contentHeaderContentCenterNameText}>用户名：{this.state.userInfo.NAME}</Text>
                                    </View>
                                     <View>
-                                        <Text  style={styles.contentHeaderContentCenterPhoneText}>手机号：15267889897</Text>
+                                        <Text  style={styles.contentHeaderContentCenterPhoneText}>手机号：{this.state.userInfo.phone}</Text>
                                     </View>
                                 </View>
                                 <View>
@@ -134,56 +149,96 @@ export default class MeScreen extends React.Component<any,any> {
                         </View>
                         <View style={styles.cardBoxBody}>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj01.png')}/>
-                                </View>
-                                <View>
-                                    <Text>我的团队</Text>
-                                </View>
+                               <TouchableOpacity onPress={()=>{
+                                   this.props.navigation.navigate('myTeam');
+                               }}>
+                                   <View style={styles.cardBoxBodyItemImgBox}>
+                                      <View style={styles.cardBoxBodyItemImg}>
+                                          <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj01.png')}/>
+                                      </View>
+                                      <View>
+                                          <Text>我的团队</Text>
+                                      </View>
+                                  </View>
+                               </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj02.png')}/>
-                                </View>
-                                <Text>邀请好友</Text>
+                                <TouchableOpacity onPress={()=>{
+                                    this.props.navigation.navigate('sharePromotion');
+                                }}>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                        <View style={styles.cardBoxBodyItemImg}>
+                                            <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj02.png')}/>
+                                        </View>
+                                        <Text>邀请好友</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj03.png')}/>
-                                </View>
-                                <Text>收藏中心</Text>
+                                <TouchableOpacity onPress={()=>{
+                                    this.props.navigation.navigate('myCollectCenter');
+                                }}>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                        <View style={styles.cardBoxBodyItemImg}>
+                                            <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj03.png')}/>
+                                        </View>
+                                        <Text>收藏中心</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj04.png')}/>
-                                </View>
-                                <Text>我的拼团</Text>
+                                <TouchableOpacity onPress={()=>{
+                                    this.props.navigation.navigate('myJoinGroup');
+                                }}>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                        <View style={styles.cardBoxBodyItemImg}>
+                                            <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj04.png')}/>
+                                        </View>
+                                        <Text>我的拼团</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj05.png')}/>
-                                </View>
-                                <Text>安全中心</Text>
+                                <TouchableOpacity onPress={()=>{
+                                    this.props.navigation.navigate('safetySetting');
+                                }}>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                        <View style={styles.cardBoxBodyItemImg}>
+                                            <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj05.png')}/>
+                                        </View>
+                                        <Text>安全中心</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj06.png')}/>
-                                </View>
-                                <Text>银行卡</Text>
+                                <TouchableOpacity>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                        <View style={styles.cardBoxBodyItemImg}>
+                                            <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj06.png')}/>
+                                        </View>
+                                        <Text>银行卡</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj07.png')}/>
-                                </View>
-                                <Text>收货地址</Text>
+                                <TouchableOpacity>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                        <View style={styles.cardBoxBodyItemImg}>
+                                            <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj07.png')}/>
+                                        </View>
+                                        <Text>收货地址</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={styles.cardBoxBodyItem}>
-                                <View style={styles.cardBoxBodyItemImg}>
-                                    <TouchableOpacity onPress={()=>this.onGoMySettingPage()}>
-                                        <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj08.png')}/>
-                                    </TouchableOpacity>
-                                </View>
-                                <Text>设置中心</Text>
+                                <TouchableOpacity onPress={()=>this.onGoMySettingPage()}>
+                                    <View style={styles.cardBoxBodyItemImgBox}>
+                                       <View style={styles.cardBoxBodyItemImg}>
+                                           <CachedImage style={styles.filePathImg} source={require('@/assess/images/me/wd_icon_gj08.png')}/>
+                                       </View>
+                                       <Text>设置中心</Text>
+                                   </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -311,5 +366,10 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         borderRadius:5,
         overflow:'hidden'
+    },
+    cardBoxBodyItemImgBox:{
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center'
     }
 })

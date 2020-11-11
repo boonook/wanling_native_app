@@ -8,8 +8,8 @@ import {CachedImageBackground} from "react-native-img-cache";
 export default class AcceptNewcreen extends React.Component<any,any> {
     componentDidMount() {
         this.props.navigation.addListener('focus', () => {
-            StatusBar.setBarStyle('light-content');
-            StatusBar.setBackgroundColor(theme.backgroundColor)
+            StatusBar.setBarStyle('dark-content');
+            StatusBar.setBackgroundColor('#fff')
         });
     }
 
@@ -26,10 +26,10 @@ export default class AcceptNewcreen extends React.Component<any,any> {
             <View style={{ flex: 1}}>
                 <Headers
                     border={true}
-                    backgroundColor={'#EB5B62'}
+                    backgroundColor={'#fff'}
                     title={'任务中心'}
-                    centerColor={'#fff'}
-                    rightColor={'#fff'}
+                    centerColor={'#666'}
+                    rightColor={'#666'}
                     onClickRightBtn={()=>this._onClickRightBtn()}
                     rightTitle={'已参与任务'}
                     {...this.props}

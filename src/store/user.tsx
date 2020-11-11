@@ -47,14 +47,13 @@ class UserState {
     @action login(param){
         let token = param.token||null;
         this.token = token||null;
-        this.save('isLogin','true');
         this.save('token',token);
-        NavigationService.reset('home');
     }
 
     @action setUserInfo(data){
+        this.save('isLogin','true');
         this.save('userInfo',JSON.stringify(data));
-
+        NavigationService.reset('home');
     }
     @action loginOut(){
         this.isLogin = 'false';

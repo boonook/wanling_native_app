@@ -19,6 +19,17 @@ export const getCode = (params) => {
     })
 };
 
+///忘记密码
+export const getForgetPwdCode = (params) => {
+    return Request.http({
+        method:'POST',
+        url:'/wlapi/login/getResetVerificationCode',
+        params:params,
+        formData:false,
+        token:false
+    })
+};
+
 export const registered = (params) => {
     return Request.http({
         method:'POST',
@@ -36,5 +47,15 @@ export const resetPassword = (params) => {
         params:params,
         formData:false,
         token:false
+    })
+};
+
+export const userInfo = (params) => {
+    return Request.http({
+        method:'POST',
+        url:'/wlapi/user/getUserIdByToken',
+        params:params,
+        formData:false,
+        token:true
     })
 };
