@@ -52,6 +52,8 @@ class UserState {
 
     @action setUserInfo(data){
         this.save('isLogin','true');
+        this.isLogin = 'true';
+        this.userInfo = JSON.stringify(data);
         this.save('userInfo',JSON.stringify(data));
         NavigationService.reset('home');
     }

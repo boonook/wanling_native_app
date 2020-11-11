@@ -14,6 +14,8 @@ export default class MeScreen extends React.Component<any,any> {
     constructor(props) {
         super(props);
         this.state = {
+            name:null,
+            phone:null,
             userInfo:{}
         };
     }
@@ -23,9 +25,11 @@ export default class MeScreen extends React.Component<any,any> {
             StatusBar.setBarStyle('dark-content');
             StatusBar.setBackgroundColor('#fff')
         });
-        let userInfo = JSON.parse(this.props.userState.getUserInfo)
+        let userInfo = JSON.parse(this.props.userState.getUserInfo);
         this.setState({
-            userInfo
+            userInfo,
+            name:userInfo.Name||null,
+            phone:userInfo.phone||null,
         })
     }
     openDrawer=()=>{
@@ -56,10 +60,10 @@ export default class MeScreen extends React.Component<any,any> {
                                 </View>
                                 <View style={styles.contentHeaderContentCenter}>
                                    <View>
-                                       <Text style={styles.contentHeaderContentCenterNameText}>用户名：{this.state.userInfo.NAME}</Text>
+                                       <Text style={styles.contentHeaderContentCenterNameText}>用户名：{this.state.name||null}</Text>
                                    </View>
                                     <View>
-                                        <Text  style={styles.contentHeaderContentCenterPhoneText}>手机号：{this.state.userInfo.phone}</Text>
+                                        <Text  style={styles.contentHeaderContentCenterPhoneText}>手机号：{this.state.phone||null}</Text>
                                     </View>
                                 </View>
                                 <View>

@@ -50,7 +50,6 @@ export default class LoginScreen extends React.Component<any,any>{
                 let data = res.data||{};
                 this.props.userState.login(data);
                 userInfo({}).then(res=>{
-                    debugger
                     this.props.userState.setUserInfo(res.data);
                 })
             }
