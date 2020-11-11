@@ -28,7 +28,7 @@ export default class MeScreen extends React.Component<any,any> {
         let userInfo = JSON.parse(this.props.userState.getUserInfo);
         this.setState({
             userInfo,
-            name:userInfo.Name||null,
+            name:userInfo.NAME||null,
             phone:userInfo.phone||null,
         })
     }

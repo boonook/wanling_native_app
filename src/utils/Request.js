@@ -264,9 +264,16 @@ export default class Request {
                     store.userState.loginOut();
                 },800)
             }else{
-                return {
-                    ...response,
-                    code: code,
+                if(response.title+''==='error'){
+                    let error = new Error();
+                    error.message = response.data;
+                    error.code = code;
+                    throw error
+                }else{
+                    return {
+                        ...response,
+                        code: code,
+                    }
                 }
             }
         }
