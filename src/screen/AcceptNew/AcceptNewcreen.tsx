@@ -23,7 +23,7 @@ export default class AcceptNewcreen extends React.Component<any,any> {
 
     render() {
         return(
-            <View style={{ flex: 1}}>
+            <View style={{ flex:1,backgroundColor:"#f8f8f8"}}>
                 <Headers
                     border={true}
                     backgroundColor={'#fff'}
@@ -36,7 +36,7 @@ export default class AcceptNewcreen extends React.Component<any,any> {
                 />
                 <ScrollView style={{flex:1}}>
                     <View style={styles.contentHeader}>
-                        <CachedImageBackground  style={{width:'100%',height:260}}  source={require('@/assess/images/acceptNew/wode_bg.png')}>
+                        <CachedImageBackground  style={{width:'100%',height:260}}  source={require('@/assess/images/me/wode_bg.png')}>
                             <View style={styles.contentHeaderContent}>
                                 <View style={styles.contentHeaderContentLeft}>
 

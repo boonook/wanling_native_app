@@ -43,7 +43,7 @@ export default class MeScreen extends React.Component<any,any> {
     }
     render() {
         return(
-            <View style={{ flex: 1}}>
+            <View style={{ flex: 1,backgroundColor:"#f8f8f8"}}>
                 <Headers
                     backgroundColor={'#fff'}
                     centerContent={<Text style={[styles.headerBoxCenterText,{color:'#666'}]} numberOfLines={1}>{'我的'}</Text>}
