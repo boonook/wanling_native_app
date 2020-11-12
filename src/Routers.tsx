@@ -51,6 +51,10 @@ import SafetySettingScreen from '@/screen/me/common/SafetySettingScreen';
 import EditLoginPwdScreen from '@/screen/me/common/EditLoginPwdScreen';
 ///修改支付密码
 import EditPayPwdScreen from '@/screen/me/common/EditPayPwdScreen';
+///修改支付密码
+import SignCenterScreen from '@/screen/me/common/SignCenterScreen';
+///修改支付密码
+import AllOrderScreen from '@/screen/me/common/AllOrderScreen';
 import NavigationService from '@/utils/NavigationService';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -83,6 +87,8 @@ const menu=[
     {name:'safetySetting',component:SafetySettingScreen},
     {name:'editLoginPwd',component:EditLoginPwdScreen},
     {name:'editPayPwd',component:EditPayPwdScreen},
+    {name:'signCenter',component:SignCenterScreen},
+    {name:'allOrder',component:AllOrderScreen},
 ]
 
 function homeTab() {

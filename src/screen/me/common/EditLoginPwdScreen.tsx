@@ -149,7 +149,7 @@ const EditLoginPwdScreen = (props) => {
     }
 
     return(
-        <Provider>
+        <View>
             <KeyboardAwareScrollView>
                 <View style={{ height:height,width:width,flexDirection:'column',backgroundColor:'#fff'}}>
                     <Headers
@@ -222,7 +222,7 @@ const EditLoginPwdScreen = (props) => {
                     </View>
                 </View>
             </KeyboardAwareScrollView>
-        </Provider>
+        </View>
     )
 }
 

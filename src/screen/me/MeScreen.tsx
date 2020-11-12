@@ -67,7 +67,11 @@ export default class MeScreen extends React.Component<any,any> {
                                     </View>
                                 </View>
                                 <View>
-                                    <Text style={styles.sign}>签到</Text>
+                                    <TouchableOpacity onPress={()=>{
+                                        this.props.navigation.navigate('signCenter');
+                                    }}>
+                                        <Text style={styles.sign}>签到</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </CachedImageBackground>
@@ -80,12 +84,18 @@ export default class MeScreen extends React.Component<any,any> {
                             <View style={styles.cardBoxHeaderLeft}>
                                 <Text>我的订单</Text>
                             </View>
-                            <View>
-                                <Text style={{color:'#999'}}>查看全部订单</Text>
-                            </View>
-                            <View>
-                                <Icon name={'right'} size={16} color={'#999'} />
-                            </View>
+                            <TouchableOpacity  onPress={()=>{
+                                this.props.navigation.navigate('allOrder');
+                            }}>
+                                <View style={styles.cardBoxHeaderRight}>
+                                    <View>
+                                        <Text style={{color:'#999'}}>查看全部订单</Text>
+                                    </View>
+                                    <View>
+                                        <Icon name={'right'} size={16} color={'#999'} />
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.cardBoxBody}>
                             <View style={styles.cardBoxBodyItem}>
@@ -311,8 +321,8 @@ const styles = StyleSheet.create({
         width:'25%'
     },
     filePathImg:{
-        width:40,
-        height:40
+        width:30,
+        height:30
     },
     cardBoxBodyItemImg:{
         marginBottom:10
@@ -375,5 +385,9 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center'
+    },
+    cardBoxHeaderRight:{
+        flexDirection:'row',
+        alignItems:'center'
     }
 })

@@ -1,7 +1,6 @@
 import React from "react";
 import {View, ScrollView, StatusBar, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import Headers from "@/Components/header/Headers";
-import theme from "@/theme/theme";
 import {Icon} from "@ant-design/react-native";
 import {CachedImageBackground} from "react-native-img-cache";
 

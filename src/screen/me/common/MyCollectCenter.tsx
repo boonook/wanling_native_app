@@ -122,7 +122,7 @@ export default class MyCollectCenter extends React.Component<any,any> {
                                             <Text style={styles.listItemRightTopText} numberOfLines={2}>123123123123123123123123123123123123123123123123123123<Text>（<Text  style={styles.listItemRightTopFinishText}>已完成</Text>）</Text></Text>
                                         </View>
                                         <View  style={styles.hotPinTuanBox}>
-                                            <Text>原价:￥1199</Text>
+                                            <Text style={{textDecorationLine:'line-through'}}>原价:￥1199</Text>
                                             <View style={styles.hotPinTuan}><Text style={styles.hotPinTuanText}>爆款拼团</Text></View>
                                         </View>
                                         <View>

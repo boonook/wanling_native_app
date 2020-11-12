@@ -2,6 +2,9 @@ import React from "react";
 import {View, StatusBar,Text, StyleSheet,ScrollView} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import Headers from "@/Components/header/Headers";
+import {getNewListDetail} from '@/Api/home'
+import constant from "@/utils/constant";
+import moment from "moment";
 export default class NewDetailScreen extends React.Component<any,any> {
     constructor(props) {
         super(props);
@@ -21,6 +24,22 @@ export default class NewDetailScreen extends React.Component<any,any> {
         let {id,title} = this.props.route.params;
         this.setState({
             appTitle:title||'详情'
+        },()=>this.getDataDetail(id))
+    }
+
+    getDataDetail=(id)=>{
+        let params={
+            id
+        }
+        getNewListDetail(params).then(res=>{
+            if(res && res.code+''===constant.SUCCESS+''){
+                let data = res.data||{};
+                this.setState({
+                    title:data.title||'---',
+                    date:moment(data.releaseTime).format('YYYY-MM-DD HH:mm'),
+                    htmlContent:data.content||'---'
+                })
+            }
         })
     }
 

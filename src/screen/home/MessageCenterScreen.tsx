@@ -2,15 +2,19 @@ import React from "react";
 import {View, StatusBar, Text, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
 import Headers from "@/Components/header/Headers";
 import {Icon} from "@ant-design/react-native";
+import moment from 'moment'
+import {getNewList} from "@/Api/home";
+import constant from "@/utils/constant";
 export default class MessageCenterScreen extends React.Component<any,any> {
     constructor(props) {
         super(props);
         this.state = {
-            list:[{id:'1'},{id:'2'},{id:'3'}],
+            list:[],
             refreshing:false,
             page:1,
+            size:10,
             loading:false,
-            total:3
+            total:0
         };
     }
 
@@ -19,6 +23,27 @@ export default class MessageCenterScreen extends React.Component<any,any> {
             StatusBar.setBarStyle('dark-content');
             StatusBar.setBackgroundColor('#fff')
         });
+        this.getDataList();
+    }
+
+    getDataList=()=>{
+        let param = {
+            size:this.state.size,
+            current:this.state.page,
+            type:'公告'
+        }
+        getNewList(param).then(res=>{
+            if(res && res.code+''===constant.SUCCESS+''){
+                let data = res.data||{};
+                let list = data.list||[];
+                this.setState({
+                    total:data.total||0,
+                    list:this.state.page === 1 ? list : [...this.state.list, ...list],
+                    loading:false,
+                    refreshing: false,
+                })
+            }
+        })
     }
 
     handleLoadMore=()=>{
@@ -32,7 +57,7 @@ export default class MessageCenterScreen extends React.Component<any,any> {
                         loading:true,
                     },
                     () => {
-                        // this.getDataList();
+                        this.getDataList();
                     }
                 );
             }
@@ -72,7 +97,7 @@ export default class MessageCenterScreen extends React.Component<any,any> {
                 refreshing: true,
             },
             () => {
-                // this.getDataList();
+                this.getDataList();
             }
         );
     };
@@ -107,10 +132,10 @@ export default class MessageCenterScreen extends React.Component<any,any> {
                                     </View>
                                     <View style={styles.listItemRight}>
                                         <View style={styles.listItemRightTop}>
-                                            <Text  style={styles.listItemRightTopText} numberOfLines={2}>万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线万岭商会正是上线</Text>
+                                            <Text  style={styles.listItemRightTopText} numberOfLines={2}>{item.title||'---'}</Text>
                                         </View>
                                         <View>
-                                            <Text style={styles.listItemRightFooterText}>2020-09-08</Text>
+                                            <Text style={styles.listItemRightFooterText}>{moment(item.releaseTime).format('YYYY-MM-DD HH:mm')}</Text>
                                         </View>
                                     </View>
                                     <Icon name={'right'} size={16} color={'#999'} />
